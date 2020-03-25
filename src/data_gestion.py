@@ -41,4 +41,33 @@ def create_train_test_set(dataframe,
     train_features = train_dataset
     test_labels = test_dataset.pop('energie')
     test_features =test_dataset
-    creturn train_features, train_labels, test_features, test_labels
+    return train_features, train_labels, test_features, test_labels
+
+def get_statistics(dataframe,
+                   *argv):
+    """ Compute some basic statistics over the data 
+        Arguments :
+            :dataframe: pandas DataFrame 
+            :*argv: allows to pass multiple DataFrame in one time
+        Output : None
+    """
+    print('Statistics Computed : \n {}'.format(dataframe.describe().transpose()))
+    for arg in argv :
+        print(arg.describe().transpose())
+        
+def norm(x):
+    """ Standardization of a dataset 
+        Arguments :
+            :x: pandas Dataframe contening the data to standardize
+        Output :
+            A pandas DataFrame with standardize values
+    """
+    x_stats = x.describe().transpose()
+    return((x - x_stats['mean'])/x_stats['std'])
+
+def minmaxscaler(x):
+    x_stats = x.describe().transpose()
+    return ((x-x_stats['max'])/(x_stats['max']-x_stats['min']))
+
+
+

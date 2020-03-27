@@ -21,12 +21,14 @@ def open_data(file,
 
 def create_train_test_set(dataframe,
                           train_frac,
-                          test_frac):
+                          test_frac
+                          target):
     """ Create the train and test set for the training with a random method
         Arguments :
             :dataframe: pandas DataFrame containing the date to split
             :train_frac: float, fraction number of training data to keep
             :test_frac: float, fraction number of test data to keep
+            :target: string, name of the target value
         Outputs : 
             :train_features: pandas DataFrame of the training points selected randomly
             :train_labels: pandas DataFrame, outputs for the training
@@ -37,9 +39,9 @@ def create_train_test_set(dataframe,
     tmp = dataframe.drop(train_dataset.index)
     test_dataset = tmp.sample(frac = test_frac, random_state = 123)
     tmp.drop(test_dataset.index)
-    train_labels = train_dataset.pop('energie')  
+    train_labels = train_dataset.pop(target)
     train_features = train_dataset
-    test_labels = test_dataset.pop('energie')
+    test_labels = test_dataset.pop(target)
     test_features =test_dataset
     return train_features, train_labels, test_features, test_labels
 

@@ -21,7 +21,7 @@ def open_data(file,
 
 def create_train_test_set(dataframe,
                           train_frac,
-                          test_frac
+                          test_frac,
                           target):
     """ Create the train and test set for the training with a random method
         Arguments :
